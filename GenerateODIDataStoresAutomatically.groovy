@@ -32,7 +32,7 @@ import groovy.json.JsonSlurper;
 import groovy.beans.Bindable 
 import oracle.odi.domain.project.StepVariable.DeclareVariable
 
-host = "http://130.61.182.119:8065"
+host = "<API that I'm using to read a file with extractions>"
 myExtractions=[]
 ExtractionList = []
 
@@ -92,11 +92,11 @@ def get = new URL(host).openConnection();
                 
                 //Find Model
                 varM = (IOdiModelFinder)odiInstance.getTransactionalEntityManager().getFinder(OdiModel.class);
-                def model = varM.findByCode("XU")
+                def model = varM.findByCode("<Model name>")
                 println("var " + model)
                 //find datastore    
                 varD = (IOdiDataStoreFinder)odiInstance.getTransactionalEntityManager().getFinder(OdiDataStore.class);
-                dataStore = varD.findByName(extract, "XU")
+                dataStore = varD.findByName(extract, "<Model name>")
               //If datastore doesn't exist create a new one
                 if (dataStore == null){
                 try{
