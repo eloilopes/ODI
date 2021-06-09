@@ -3,7 +3,7 @@
 
 **ODI_SwingBuilder.groovy**
 
-In this file I'm creating a simple GUI to read extraction names from a third party tool (Xtract Universal). That tool provides an API. In the code you will find the different functions to read
+In this file I'm creating a simple GUI to read extraction names from a third party tool. That tool provides an API. In the code you will find the different functions to read
 the output of API calls and after just pick the information that is needed. This is the current architecture:
 
 
