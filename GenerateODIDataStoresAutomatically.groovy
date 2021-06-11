@@ -32,7 +32,7 @@ import groovy.json.JsonSlurper;
 import groovy.beans.Bindable 
 import oracle.odi.domain.project.StepVariable.DeclareVariable
 
-host = "<your host>"
+host = "IP or hostname and Port of your 3rd party server"
 myExtractions=[]
 ExtractionList = []
 
