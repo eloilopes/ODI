@@ -44,11 +44,11 @@ def get = new URL(host).openConnection();
 			def getRC = get.getResponseCode();
 			if(getRC.equals(200)) {
 				a = get.getInputStream().getText()
-				def myFile = new File('/home/oracle/Desktop/','ListExtractions.txt')
+				def myFile = new File('<OS Path>','ListExtractions.txt')
 				myFile.write(a)
 				//println myFile.text    
 			}
-			new File('/home/oracle/Desktop/', 'ListExtractions.txt').eachLine { line, nb ->
+			new File('<OS Path>/', 'ListExtractions.txt').eachLine { line, nb ->
 				if(nb == 1)
 					return  
 				l = line.substring(0,line.indexOf(','))
@@ -76,12 +76,12 @@ def get = new URL(host).openConnection();
 
             a = getPar.getInputStream().getText()
             filename= extract+'listParameters.txt'
-            def myFilePar = new File('/home/oracle/Desktop/',filename)
+            def myFilePar = new File('<OS Path>',filename)
             myFilePar.write(a)
            
             
             def jsonSlurper = new JsonSlurper()
-            data = jsonSlurper.parse(new File('/home/oracle/Desktop/'+filename))  
+            data = jsonSlurper.parse(new File('<OS Path>'+filename))  
             try{
             parameter = data.custom.name
             for (par in parameter){           
