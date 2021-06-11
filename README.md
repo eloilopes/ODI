@@ -10,7 +10,7 @@ the output of API calls and after just pick the information that is needed. This
 ![architecture](https://github.com/eloilopes/ODI/blob/main/architecture.png)
 
 
-The GUI has one combobox and two buttons. Extractions can have parameters, that we want to set to prepare future executions. We click on "Check Parameters", fill out the parameters
+The GUI has one combobox and two buttons. Extractions can have parameters, that we want to prepare future executions. We click on "Check Parameters", fill out the parameters
 with the values we want and after we click "OK". When we click OK we will update a control table and at the same time creates ODI variables with the same parameter name and values:
 
 
