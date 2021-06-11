@@ -26,7 +26,7 @@ import oracle.odi.domain.project.StepVariable.DeclareVariable
 
 
 def swing = new SwingBuilder()
-host = "<MY host>"
+host = "<IP or hostname and Port of your 3rd party server>"
 myExtractions=[]
 ExtractionList = []
 d = new java.awt.Dimension(205,20)  
@@ -39,7 +39,7 @@ label = "label"
 // Build list of Extractions
          def getExtractionsList (extractioname) {
 			extractions = []
-			new File('/home/oracle/Desktop/', 'response.txt').eachLine { line, nb ->
+			new File('<OS path>/', 'response.txt').eachLine { line, nb ->
 				if(nb == 1)
 					return
 				l = line.substring(0,line.indexOf(','))
@@ -51,14 +51,14 @@ label = "label"
         
         def updateParameters(myExtractions) {
    
-        def getPar = new URL(host+"/config/extractions/"+myExtractions+"/parameters").openConnection();
+        def getPar = new URL(host+"<API>"+myExtractions+"/<parameters>").openConnection();
      
             def getRCPar = getPar.getResponseCode();
 
             if(getRCPar.equals(200)) {
 
                 a = getPar.getInputStream().getText()
-                def myFilePar = new File('/home/oracle/Desktop/','listParameters.txt')
+                def myFilePar = new File('<path>','listParameters.txt')
                 myFilePar.write(a)
                 println ("listParameters.txt generated ")  
             }
@@ -70,11 +70,11 @@ label = "label"
      
         def driver = Class.forName('oracle.jdbc.OracleDriver').newInstance() as Driver
         def props = new Properties()
-        props.setProperty("user", "ODI_DEMO") 
-        props.setProperty("password", "NewODI501##123")
-        def conn = driver.connect("jdbc:oracle:thin:@130.61.40.127:1521/pdbeloi.subnet.vcn.oraclevcn.com", props) 
+        props.setProperty("user", "<user>") 
+        props.setProperty("password", "<password>")
+        def conn = driver.connect("jdbc:oracle:thin:@<host>:1521/<service_name>", props) 
         def sql = new Sql(conn)
-        sql.executeUpdate "update CONTROL_EXTRACTIONS set PARAMETER_VALUE=$parameterValue WHERE PARAMETER_NAME=$parameterName and EXTRACTION_NAME=$extractionName"
+        sql.executeUpdate "update <table_name> set <parameter_column>=$parameterValue WHERE <parameter_name>=$parameterName and <extraction_name>=$extractionName"
         sql.close()
        
     }
@@ -90,11 +90,11 @@ label = "label"
 			def getRC = get.getResponseCode();
 			if(getRC.equals(200)) {
 				a = get.getInputStream().getText()
-				def myFile = new File('/home/oracle/Desktop/','response.txt')
+				def myFile = new File('<OS path>','response.txt')
 				myFile.write(a)
  
 			}
-			new File('/home/oracle/Desktop/', 'response.txt').eachLine { line, nb ->
+			new File('<OS path>', 'response.txt').eachLine { line, nb ->
 				if(nb == 1)
 					return  
 				l = line.substring(0,line.indexOf(','))
@@ -121,7 +121,7 @@ label = "label"
               
             }
             def jsonSlurper = new JsonSlurper()
-            data = jsonSlurper.parse(new File('/home/oracle/Desktop/listParameters.txt'))           
+            data = jsonSlurper.parse(new File('<OS Path>/listParameters.txt'))           
             try{
             parameter = data.custom.name
 
