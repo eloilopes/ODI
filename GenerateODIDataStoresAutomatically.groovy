@@ -68,7 +68,7 @@ def get = new URL(host).openConnection();
   
  for (extract in getExtractions()){
  
- def getPar = new URL(host+"/config/extractions/"+extract+"/parameters").openConnection();
+ def getPar = new URL(host+"<API>"+extract+"/<parameters>").openConnection();
      
         def getRCPar = getPar.getResponseCode();
 
