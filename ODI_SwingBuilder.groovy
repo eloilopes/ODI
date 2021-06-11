@@ -34,6 +34,7 @@ d = new java.awt.Dimension(205,20)
 def arrayTextFields = []
 def password
 def parms = []
+label = "label"
 
 // Build list of Extractions
          def getExtractionsList (extractioname) {
