@@ -32,7 +32,7 @@ import groovy.json.JsonSlurper;
 import groovy.beans.Bindable 
 import oracle.odi.domain.project.StepVariable.DeclareVariable
 
-host = "<API that I'm using to read a file with extractions>"
+host = "<your host>"
 myExtractions=[]
 ExtractionList = []
 
