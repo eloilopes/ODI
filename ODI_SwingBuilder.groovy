@@ -39,7 +39,8 @@ label = "label"
 // Build list of Extractions
          def getExtractionsList (extractioname) {
 			extractions = []
-			new File('<OS path>/', 'response.txt').eachLine { line, nb ->
+		 //read the file with extractions name.
+			new File('<OS path>/', '<filename>.txt').eachLine { line, nb ->
 				if(nb == 1)
 					return
 				l = line.substring(0,line.indexOf(','))
@@ -58,21 +59,22 @@ label = "label"
             if(getRCPar.equals(200)) {
 
                 a = getPar.getInputStream().getText()
-                def myFilePar = new File('<path>','listParameters.txt')
+		    // read file with parameters to be shown in GUI
+                def myFilePar = new File('<path>','<file_name>.txt')
                 myFilePar.write(a)
-                println ("listParameters.txt generated ")  
+               
             }
 
         }
  
- //Function that opens the connection and update the control tabe
+ //Function that opens the connection to oracle database and update the control table
      def updateControlTable(parameterValue, extractionName, parameterName)  {
      
         def driver = Class.forName('oracle.jdbc.OracleDriver').newInstance() as Driver
         def props = new Properties()
         props.setProperty("user", "<user>") 
         props.setProperty("password", "<password>")
-        def conn = driver.connect("jdbc:oracle:thin:@<host>:1521/<service_name>", props) 
+        def conn = driver.connect("jdbc:oracle:thin:@<host>:<port>/<service_name>", props) 
         def sql = new Sql(conn)
         sql.executeUpdate "update <table_name> set <parameter_column>=$parameterValue WHERE <parameter_name>=$parameterName and <extraction_name>=$extractionName"
         sql.close()
@@ -90,11 +92,11 @@ label = "label"
 			def getRC = get.getResponseCode();
 			if(getRC.equals(200)) {
 				a = get.getInputStream().getText()
-				def myFile = new File('<OS path>','response.txt')
+				def myFile = new File('<OS path>','<file_name>.txt')
 				myFile.write(a)
  
 			}
-			new File('<OS path>', 'response.txt').eachLine { line, nb ->
+			new File('<OS path>', '<file_name>.txt').eachLine { line, nb ->
 				if(nb == 1)
 					return  
 				l = line.substring(0,line.indexOf(','))
@@ -121,13 +123,12 @@ label = "label"
               
             }
             def jsonSlurper = new JsonSlurper()
-            data = jsonSlurper.parse(new File('<OS Path>/listParameters.txt'))           
+            data = jsonSlurper.parse(new File('<OS Path>/<file_name>.txt'))           
             try{
-            parameter = data.custom.name
+            parameter = data.<tag on json>.name
 
 
-            for (par in parameter){
-
+            for 
             varf= (IOdiVariableFinder)odiInstance.getTransactionalEntityManager().getFinder(OdiVariable.class);
                 panel(alignmentX:0f) {
                   flowLayout(alignment:FL.RIGHT)          
@@ -136,6 +137,8 @@ label = "label"
                   
                   swing.target.add swing.label( "$par", id: label+par)
                   a = swing.target.add swing.textField( "", id: par, columns:10)
+			(par in parameter){
+			//use getfinder of ODI to find the variable with that name
                   def myGlobalExtractionName=varf.findGlobalByName("$par")
                   arrayTextFields << a
                   if (myGlobalExtractionName == null){
@@ -146,8 +149,6 @@ label = "label"
                     myVar = new OdiVariable ("$par") 
                     odiInstance.getTransactionalEntityManager().persist(myVar)
                     tm.commit(txnStatus)
-                    
-                    
                   }
                   swing.doLater { swing.top.validate() }   
             }
