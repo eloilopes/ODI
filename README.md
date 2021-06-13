@@ -27,14 +27,13 @@ In the code we don't create the model, we are using a existing one. We ODI APIs 
 
 Example:
 
-```a = getPar.getInputStream().getText()
-            filename= extract+'listParameters.txt'
-            def myFilePar = new File('/home/oracle/Desktop/',filename)
+```filename= extract+'<file_name>.txt'
+            def myFilePar = new File('<OS Path>',filename)
             myFilePar.write(a)
            
             
             def jsonSlurper = new JsonSlurper()
-            data = jsonSlurper.parse(new File('/home/oracle/Desktop/'+filename))  
+            data = jsonSlurper.parse(new File('<OS Path>'+filename))  
             try{
             parameter = data.custom.name
             for (par in parameter){           
@@ -45,11 +44,11 @@ Example:
                 
                 //Find Model
                 varM = (IOdiModelFinder)odiInstance.getTransactionalEntityManager().getFinder(OdiModel.class);
-                def model = varM.findByCode("XU")
+                def model = varM.findByCode("<Model code>")
                 println("var " + model)
                 //find datastore    
                 varD = (IOdiDataStoreFinder)odiInstance.getTransactionalEntityManager().getFinder(OdiDataStore.class);
-                dataStore = varD.findByName(extract, "XU")
+                dataStore = varD.findByName(extract, "<Model Name>")
               //If datastore doesn't exist create a new one
                 if (dataStore == null){
                 try{
