@@ -27,7 +27,8 @@ In the code we don't create the model, we are using a existing one. We ODI APIs 
 
 Example:
 
-```filename= extract+'<file_name>.txt'
+```
+	    filename= extract+'<file_name>.txt'
             def myFilePar = new File('<OS Path>',filename)
             myFilePar.write(a)
            
