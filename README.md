@@ -23,7 +23,7 @@ with the values we want and after we click "OK". When we click OK we will update
 In this script, using the same concept of extractions what we do is to create ODI Datastores and Attributes. The DataStore is the extraction name and the 
 attributes are parameters and extraction name as well.
 
-In the code we don't create the model, we are using a existing one. We ODI APIs to find the model we want to use, create the datastore and attributes.
+In the code we don't create the model, we are using a existing one. We use ODI APIs to find the model we want to use, create the datastore and attributes.
 
 Example:
 
